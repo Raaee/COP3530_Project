@@ -20,7 +20,7 @@ public class RockPaperScissors {
         boolean tie = false;
 
         System.out.println("\nWelcome to a game of Rock Paper Scissors!");
-        System.out.println("You will player against us for a chance to win. Highest of three: wins!");
+        System.out.println("You will play against us for a chance to win. Highest of three: wins!");
 
         do {
             System.out.println("\nRound " + (round+1));
