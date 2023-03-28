@@ -63,7 +63,7 @@ public class RockPaperScissors {
 
             if (!playerChoice.equalsIgnoreCase("Rock") && !playerChoice.equalsIgnoreCase("Paper")
                     && !playerChoice.equalsIgnoreCase("Scissors")) {
-                System.out.println("Invalid weapon choice.");
+                System.out.println("\nInvalid weapon choice.");
                 playerChoice = "InvalidChoice";
             }
         } while (playerChoice.equals("InvalidChoice"));
