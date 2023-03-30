@@ -132,6 +132,8 @@ public class Womble {
         System.out.println("\nRules:");
         System.out.println("------------");
         System.out.println("> Guess the word by inputting guesses.");
+        System.out.println("> The winning word is a 5-letter word.");
+        System.out.println("> Guesses must be 5-letter words.");
         System.out.println("> You will have 6 attempts to guess the correct word.");
         System.out.println("> Letters outputted within a [ ] mean the letter exists in the word, but");
         System.out.println("    it is in the wrong spot.");
