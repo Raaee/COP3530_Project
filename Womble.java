@@ -19,16 +19,16 @@ public class Womble {
     public void PlayGame() {
         System.out.println("\nWelcome to a game of Womble!");
         PrintRules();
-        // DifficultyMenu();
-        // AssignWordToGuess();
+        DifficultyMenu();
+        AssignWordToGuess();
         do {
             System.out.println("\n---------------");
             System.out.println("Tries Left: " + tries);
 
-            // GetPlayerGuess();
-            // EvaluateGuess();
-            // PrintOutput();
-            // ResetOutput();
+            GetPlayerGuess();
+            EvaluateGuess();
+            PrintOutput();
+            ResetOutput();
 
             if (won)
                 tries = 0;
@@ -36,7 +36,88 @@ public class Womble {
                 tries--;
         } while (tries > 0);
 
-        // EndingMessage();
+        EndingMessage();
+    }
+
+    public void EndingMessage() {
+        if (won) {
+            System.out.println("Correct! You Won.\n");
+        } else {
+            System.out.println("\nUh oh! You ran out of tries.");
+            System.out.println("The correct word was: " + correctWord + "\n");
+        }
+    }
+
+    public void PrintOutput() {
+        System.out.println("\n" + output);
+    }
+
+    public void AssignWordToGuess() {
+        int indx = ranGen.nextInt(wordsToGuess.length) + 0;
+        correctWord = wordsToGuess[indx];
+    }
+
+    public void ResetOutput() {
+        output = "";
+    }
+
+    public void EvaluateGuess() {
+        for (int i = 0; i < playerGuess.length(); i++) {
+            String ch = String.valueOf(playerGuess.charAt(i));
+
+            if (playerGuess.equalsIgnoreCase(correctWord)) {
+                won = true;
+                return;
+            } else if (playerGuess.charAt(i) == correctWord.charAt(i)) {
+                output += " " + playerGuess.charAt(i) + " ";
+                output = output.toUpperCase();
+            } else if (playerGuess.charAt(i) != correctWord.charAt(i) && correctWord.contains(ch)) {
+                String s = "[" + ch + "]";
+                output += s;
+                output = output.toUpperCase();
+            } else if (!correctWord.contains(ch)) {
+                output += " X ";
+                output = output.toUpperCase();
+            }
+        }
+    }
+
+    public void GetPlayerGuess() {
+        boolean loop;
+        do {
+            loop = false;
+            System.out.println("\nEnter your guess:");
+            playerGuess = sc.nextLine();
+            if (playerGuess.length() < 5 || playerGuess.length() > 5) {
+                System.out.println("Word must be 5 letters.");
+                loop = true;
+            }
+        } while (loop);
+    }
+
+    public void DifficultyMenu() {
+        String difficulty;
+        boolean loop;
+        do {
+            loop = false;
+            System.out.println("\nChoose a difficulty:");
+            System.out.println("1. Easy");
+            System.out.println("2. Mid");
+            System.out.println("3. Hard");
+            difficulty = sc.nextLine();
+
+            if (!difficulty.equals("1") && !difficulty.equals("2") && !difficulty.equals("3")) {
+                System.out.println("\nInvalid Choice.");
+                loop = true;
+            }
+
+        } while (loop);
+
+        switch (difficulty) {
+            case "1" -> wordsToGuess = wombleWordsData.EasyWords();
+            case "2" -> wordsToGuess = wombleWordsData.MidWords();
+            case "3" -> wordsToGuess = wombleWordsData.HardWords();
+        }
     }
 
     public void PrintRules() {
