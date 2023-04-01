@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 /// SUMMARY
@@ -8,17 +7,17 @@ import java.util.Scanner;
  */
 public class RockPaperScissors {
 
-    private static Scanner sc = new Scanner(System.in);
-    private static String playerChoice, computerChoice;
-    private static String winner;
-    private static int amtPlayerWins = 0, amtComputerWins = 0;
-    private static String[] playerWins = new String[3];
-    private static String[] computerWins = new String[3];
-    private static boolean playAgain;
-    private static int round = 0;
-    private static boolean tie = false;
+    private Scanner sc = new Scanner(System.in);
+    private String playerChoice, computerChoice;
+    private String winner;
+    private int amtPlayerWins = 0, amtComputerWins = 0;
+    private String[] playerWins = new String[3];
+    private String[] computerWins = new String[3];
+    private boolean playAgain;
+    private int round = 0;
+    private boolean tie = false;
 
-    private static Input input = new Input();
+    private Input input = new Input();
 
     // Acts as the "main" method for this game class:
     public void PlayGame() {
@@ -58,12 +57,6 @@ public class RockPaperScissors {
         } while (playAgain);
     }
 
-    // Generates random number:
-    public int GetRandomNum(int origin, int bound) {
-        Random ranNum = new Random();
-        return ranNum.nextInt(bound - origin + 1) + origin;
-    }
-
     // Method to collect and evaluate the player's input:
     public void GetPlayerChoice() {
         do {
@@ -73,7 +66,7 @@ public class RockPaperScissors {
 
             if (!playerChoice.equalsIgnoreCase("Rock") && !playerChoice.equalsIgnoreCase("Paper")
                     && !playerChoice.equalsIgnoreCase("Scissors")) {
-                System.out.println("\nInvalid weapon choice.");
+                System.out.println("Invalid weapon choice.\n");
                 playerChoice = "InvalidChoice";
             }
         } while (playerChoice.equals("InvalidChoice"));
@@ -81,7 +74,7 @@ public class RockPaperScissors {
 
     // Assigns a choice for the computer based on a random number:
     public void AssignCompChoice() {
-        switch (GetRandomNum(0, 2)) {
+        switch (input.GetRandomNum(0, 2)) {
             case 0 -> computerChoice = "Rock";
             case 1 -> computerChoice = "Paper";
             case 2 -> computerChoice = "Scissors";
@@ -123,7 +116,7 @@ public class RockPaperScissors {
         if (amtPlayerWins > amtComputerWins) {
             System.out.println("\n* ~ You Win! ~ *");
         } else {
-            System.out.println("\nWe Won! Better luck next time.");
+            System.out.println("\nx ~ We Won! Better luck next time. ~ x");
         }
     }
 
