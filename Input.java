@@ -1,13 +1,17 @@
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 /*
- * This file is used to keep all methods that are repeated used throughout the project. 
- * This is to prevent repition of code and to keep things organized.
+ * This file is used to keep all methods that are repeatedly used throughout the project. 
+ * This is to prevent repetition of code and to keep things organized.
  */
 
 public class Input {
     private static Scanner sc = new Scanner(System.in);
 
+    // This method is used to validate a choice input based on the number of choices
+    // there are
+    // method returns the choice # that was inputted after it has been validated:
     public int ChoiceInput(int min, int max) {
         boolean valid = false;
         int choice = 0;
@@ -31,6 +35,8 @@ public class Input {
         return choice;
     }
 
+    // Method used to ask the player if they would wish to play again after every
+    // game:
     public boolean PlayAgain() {
         boolean playAgain = false;
 
@@ -49,6 +55,12 @@ public class Input {
             }
         }
         return playAgain;
+    }
+
+    // Generates random number:
+    public int GetRandomNum(int origin, int bound) {
+        Random ranNum = new Random();
+        return ranNum.nextInt(bound - origin + 1) + origin;
     }
 
 }

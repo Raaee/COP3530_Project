@@ -1,23 +1,26 @@
-import java.util.Random;
 import java.util.Scanner;
+/*
+ * This is a word guessing game. Based off of the NewYork Time's Web game, Wordle.
+ * Player attempts to guess a word within 6 tries of receiving letter position feedback.
+ */
 
 public class Womble {
 
-    private static Random ranGen = new Random();
-    private static Scanner sc = new Scanner(System.in);
-    private static String playerGuess;
-    private static String output = "";
+    private Scanner sc = new Scanner(System.in);
+    private String playerGuess;
+    private String output = "";
 
-    private static WombleWordsData wombleWordsData = new WombleWordsData();
-    private static String[] wordsToGuess;
-    private static String correctWord;
+    private Input input = new Input();
+    private WombleWordsData wombleWordsData = new WombleWordsData();
+    private String[] wordsToGuess;
+    private String correctWord;
 
-    private static boolean won;
-    private static boolean playAgain;
-    private static Input input = new Input();
+    private boolean won;
+    private boolean playAgain;
 
-    private static int tries = 6;
+    private int tries = 6;
 
+    // Acts as the "main" method for this game class:
     public void PlayGame() {
         do {
             ResetGame();
@@ -26,6 +29,7 @@ public class Womble {
             PrintRules();
             DifficultyMenu();
             AssignWordToGuess();
+
             do {
                 System.out.println("\n---------------");
                 System.out.println("Tries Left: " + tries);
@@ -61,7 +65,7 @@ public class Womble {
     }
 
     public void AssignWordToGuess() {
-        int indx = ranGen.nextInt(wordsToGuess.length) + 0;
+        int indx = input.GetRandomNum(0, wordsToGuess.length - 1);
         correctWord = wordsToGuess[indx];
     }
 
@@ -69,6 +73,22 @@ public class Womble {
         output = "";
     }
 
+    // Method that receives the player's guess and evaluates whether or not it is a
+    // valid input:
+    public void GetPlayerGuess() {
+        boolean loop;
+        do {
+            loop = false;
+            System.out.println("\nEnter your guess:");
+            playerGuess = sc.nextLine();
+            if (playerGuess.length() < 5 || playerGuess.length() > 5) {
+                System.out.println("Word must be 5 letters.");
+                loop = true;
+            }
+        } while (loop);
+    }
+
+    // Method that checks if the player's guess exists in the correct word:
     public void EvaluateGuess() {
         for (int i = 0; i < playerGuess.length(); i++) {
             String ch = String.valueOf(playerGuess.charAt(i));
@@ -90,19 +110,8 @@ public class Womble {
         }
     }
 
-    public void GetPlayerGuess() {
-        boolean loop;
-        do {
-            loop = false;
-            System.out.println("\nEnter your guess:");
-            playerGuess = sc.nextLine();
-            if (playerGuess.length() < 5 || playerGuess.length() > 5) {
-                System.out.println("Word must be 5 letters.");
-                loop = true;
-            }
-        } while (loop);
-    }
-
+    // Displays difficulty selection menu and assigns a difficulty according to the
+    // input:
     public void DifficultyMenu() {
         String difficulty;
         boolean loop;
@@ -136,14 +145,6 @@ public class Womble {
     }
 
     public void PrintRules() {
-        /*
-         * [X] means the letter exists in the word but is in the wrong spot
-         * X means the letter does not exist in the word
-         * if the letter does not get replaced, means it is in the correct spot in the
-         * word
-         * 
-         * player will have 6 attempts to guess the word.
-         */
         System.out.println("\nRules:");
         System.out.println("------------");
         System.out.println("> Guess the word by inputting guesses.");
