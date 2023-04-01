@@ -12,14 +12,17 @@ public class Womble {
     private static String[] wordsToGuess;
     private static String correctWord;
 
-    private static boolean won = false;
-    private static boolean playAgain = false;
+    private static boolean won;
+    private static boolean playAgain;
+    private static Input input = new Input();
 
     private static int tries = 6;
 
     public void PlayGame() {
         do {
-            System.out.println("\nWelcome to a game of Womble!");
+            ResetGame();
+
+            System.out.println("\n~~ Welcome to a game of Womble! ~~");
             PrintRules();
             DifficultyMenu();
             AssignWordToGuess();
@@ -39,13 +42,14 @@ public class Womble {
             } while (tries > 0);
 
             EndingMessage();
+            playAgain = input.PlayAgain();
 
         } while (playAgain);
     }
 
     public void EndingMessage() {
         if (won) {
-            System.out.println("Correct! You Won.\n");
+            System.out.println("Correct! You Won. ~ *\n");
         } else {
             System.out.println("\nUh oh! You ran out of tries.");
             System.out.println("The correct word was: " + correctWord + "\n");
@@ -122,6 +126,13 @@ public class Womble {
             case "2" -> wordsToGuess = wombleWordsData.MidWords();
             case "3" -> wordsToGuess = wombleWordsData.HardWords();
         }
+    }
+
+    public void ResetGame() {
+        tries = 6;
+        playerGuess = " ";
+        playAgain = false;
+        won = false;
     }
 
     public void PrintRules() {

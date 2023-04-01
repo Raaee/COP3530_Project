@@ -9,17 +9,6 @@ public class Main {
     private static Main Instance = new Main();
     private static Input input = new Input();
 
-    private Main() {
-
-    }
-
-    public static Main Instance() {
-        if (Instance == null) {
-            Instance = new Main();
-        }
-        return Instance;
-    }
-
     public static void main(String[] args) {
         MainMenu();
     }
@@ -48,5 +37,17 @@ public class Main {
             case 4 -> System.out.println("Game in progress...");
             case 5 -> System.out.println("Game in progress...");
         }
+    }
+
+    // Singleton Instance Stuff:
+    private Main() {
+
+    }
+
+    public static Main Instance() {
+        if (Instance == null) {
+            Instance = new Main();
+        }
+        return Instance;
     }
 }

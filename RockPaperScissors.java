@@ -18,11 +18,12 @@ public class RockPaperScissors {
     private static int round = 0;
     private static boolean tie = false;
 
+    private static Input input = new Input();
+
     // Acts as the "main" method for this game class:
     public void PlayGame() {
 
         do {
-            playAgain = false;
             ResetGame();
 
             System.out.println("\n~~ Welcome to a game of Rock Paper Scissors! ~~");
@@ -52,7 +53,7 @@ public class RockPaperScissors {
 
             CheckWinner();
             DisplayPlayerScores();
-            PlayAgain();
+            playAgain = input.PlayAgain();
 
         } while (playAgain);
     }
@@ -81,15 +82,9 @@ public class RockPaperScissors {
     // Assigns a choice for the computer based on a random number:
     public void AssignCompChoice() {
         switch (GetRandomNum(0, 2)) {
-            case 0:
-                computerChoice = "Rock";
-                break;
-            case 1:
-                computerChoice = "Paper";
-                break;
-            case 2:
-                computerChoice = "Scissors";
-                break;
+            case 0 -> computerChoice = "Rock";
+            case 1 -> computerChoice = "Paper";
+            case 2 -> computerChoice = "Scissors";
         }
     }
 
@@ -146,25 +141,6 @@ public class RockPaperScissors {
         amtComputerWins = 0;
         amtPlayerWins = 0;
         winner = " ";
-    }
-
-    public void PlayAgain() {
-        Input input = new Input();
-
-        System.out.println("\nChoose an option:");
-        System.out.println("1. Play Again");
-        System.out.println("2. Return to Main Menu");
-        System.out.println("3. Exit");
-        int choice = input.ChoiceInput(1, 3);
-
-        switch (choice) {
-            case 1 -> playAgain = true;
-            case 2 -> Main.Instance().MainMenu();
-            case 3 -> {
-                System.out.println("Goodbye!");
-                System.exit(0);
-            }
-        }
-
+        playAgain = false;
     }
 }
