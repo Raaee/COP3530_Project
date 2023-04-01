@@ -13,30 +13,34 @@ public class Womble {
     private static String correctWord;
 
     private static boolean won = false;
+    private static boolean playAgain = false;
 
     private static int tries = 6;
 
     public void PlayGame() {
-        System.out.println("\nWelcome to a game of Womble!");
-        PrintRules();
-        DifficultyMenu();
-        AssignWordToGuess();
         do {
-            System.out.println("\n---------------");
-            System.out.println("Tries Left: " + tries);
+            System.out.println("\nWelcome to a game of Womble!");
+            PrintRules();
+            DifficultyMenu();
+            AssignWordToGuess();
+            do {
+                System.out.println("\n---------------");
+                System.out.println("Tries Left: " + tries);
 
-            GetPlayerGuess();
-            EvaluateGuess();
-            PrintOutput();
-            ResetOutput();
+                GetPlayerGuess();
+                EvaluateGuess();
+                PrintOutput();
+                ResetOutput();
 
-            if (won)
-                tries = 0;
-            else
-                tries--;
-        } while (tries > 0);
+                if (won)
+                    tries = 0;
+                else
+                    tries--;
+            } while (tries > 0);
 
-        EndingMessage();
+            EndingMessage();
+
+        } while (playAgain);
     }
 
     public void EndingMessage() {

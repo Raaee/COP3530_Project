@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+
 /// SUMMARY
 /*
  * This is a game of rock paper scissors that collects the player's input and compares it to a random choice of the computer.
@@ -13,39 +14,47 @@ public class RockPaperScissors {
     private static int amtPlayerWins = 0, amtComputerWins = 0;
     private static String[] playerWins = new String[3];
     private static String[] computerWins = new String[3];
+    private static boolean playAgain;
+    private static int round = 0;
+    private static boolean tie = false;
 
     // Acts as the "main" method for this game class:
     public void PlayGame() {
-        int round = 0;
-        boolean tie = false;
-
-        System.out.println("\nWelcome to a game of Rock Paper Scissors!");
-        System.out.println("You will play against us for a chance to win. Highest of three: wins!");
 
         do {
-            System.out.println("\nRound " + (round+1));
-            System.out.println("----------");
-            GetPlayerChoice();
-            AssignCompChoice();
-            tie = CheckPlay(round);
-            round++;
+            playAgain = false;
+            ResetGame();
 
-            System.out.println("\nOur weapon: " + computerChoice);
-            System.out.println(winner);  
-            
-            // If there is a tie, the round will repeat:
-            if (tie) {
-                if (round == 1) {
-                    round = 0;
-                } else {
-                    round--;
+            System.out.println("\n~~ Welcome to a game of Rock Paper Scissors! ~~");
+            System.out.println("You will play against us for a chance to win. Highest of three: wins!");
+
+            do {
+                System.out.println("\nRound " + (round + 1));
+                System.out.println("----------");
+                GetPlayerChoice();
+                AssignCompChoice();
+                tie = CheckPlay(round);
+                round++;
+
+                System.out.println("\nOur weapon: " + computerChoice);
+                System.out.println(winner);
+
+                // If there is a tie, the round will repeat:
+                if (tie) {
+                    if (round == 1) {
+                        round = 0;
+                    } else {
+                        round--;
+                    }
                 }
-            }
-            
-        } while (round < 3);
 
-        CheckWinner();
-        DisplayPlayerScores();
+            } while (round < 3);
+
+            CheckWinner();
+            DisplayPlayerScores();
+            PlayAgain();
+
+        } while (playAgain);
     }
 
     // Generates random number:
@@ -89,20 +98,16 @@ public class RockPaperScissors {
         if (playerChoice.equalsIgnoreCase(computerChoice)) {
             winner = "Tie!";
             return true;
-        } 
-        else if (playerChoice.equalsIgnoreCase("Rock") && computerChoice.equals("Scissors")) {
+        } else if (playerChoice.equalsIgnoreCase("Rock") && computerChoice.equals("Scissors")) {
             PlayerWin(round);
             return false;
-        } 
-        else if (playerChoice.equalsIgnoreCase("Paper") && computerChoice.equals("Rock")) {
+        } else if (playerChoice.equalsIgnoreCase("Paper") && computerChoice.equals("Rock")) {
             PlayerWin(round);
             return false;
-        }
-        else if (playerChoice.equalsIgnoreCase("Scissors") && computerChoice.equals("Paper")) {
+        } else if (playerChoice.equalsIgnoreCase("Scissors") && computerChoice.equals("Paper")) {
             PlayerWin(round);
             return false;
-        }
-        else {
+        } else {
             winner = "We win this round.";
             computerWins[round] = "Win";
             amtComputerWins++;
@@ -110,8 +115,9 @@ public class RockPaperScissors {
             return false;
         }
     }
+
     public void PlayerWin(int round) {
-        winner = "You win this round!";
+        winner = "You win this round! ~ *";
         playerWins[round] = "Win";
         amtPlayerWins++;
         computerWins[round] = "Lose";
@@ -120,21 +126,45 @@ public class RockPaperScissors {
     // Checks for final winner based on the number of wins from player and computer:
     public void CheckWinner() {
         if (amtPlayerWins > amtComputerWins) {
-            System.out.println("\nYou Win!");
-        }
-        else {
+            System.out.println("\n* ~ You Win! ~ *");
+        } else {
             System.out.println("\nWe Won! Better luck next time.");
         }
     }
 
-    // Method displays the player's game scores to show which rounds they won and lost:
+    // Method displays the player's game scores to show which rounds they won and
+    // lost:
     public void DisplayPlayerScores() {
         System.out.println("\nYour Game Scores:");
         for (int i = 0; i < playerWins.length; i++) {
-            System.out.println("Round " + (i+1) + ": " + playerWins[i]);
+            System.out.println("Round " + (i + 1) + ": " + playerWins[i]);
         }
     }
 
-    
+    public void ResetGame() {
+        round = 0;
+        amtComputerWins = 0;
+        amtPlayerWins = 0;
+        winner = " ";
+    }
 
+    public void PlayAgain() {
+        Input input = new Input();
+
+        System.out.println("\nChoose an option:");
+        System.out.println("1. Play Again");
+        System.out.println("2. Return to Main Menu");
+        System.out.println("3. Exit");
+        int choice = input.ChoiceInput(1, 3);
+
+        switch (choice) {
+            case 1 -> playAgain = true;
+            case 2 -> Main.Instance().MainMenu();
+            case 3 -> {
+                System.out.println("Goodbye!");
+                System.exit(0);
+            }
+        }
+
+    }
 }
