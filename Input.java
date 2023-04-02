@@ -63,4 +63,8 @@ public class Input {
         return ranNum.nextInt(bound - origin + 1) + origin;
     }
 
+    public char GetRandomChar(char start, char end) {
+        return (char) GetRandomNum((int) 'A', (int) 'J');
+    }
+
 }

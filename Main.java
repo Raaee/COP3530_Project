@@ -8,8 +8,9 @@ public class Main {
     // add to this as more games are made . . .
     private static Womble womble = new Womble();
     private static RockPaperScissors rps = new RockPaperScissors();
-
     private static FortuneTeller fortune = new FortuneTeller();
+
+    private static Battleships bships = new Battleships();
 
     // Main Menu Variables:
     private static Main Instance = new Main();
@@ -34,7 +35,7 @@ public class Main {
         System.out.println("1. Rock Paper Scissors");
         System.out.println("2. Fortune Teller");
         System.out.println("3. Womble");
-        System.out.println("4. ---");
+        System.out.println("4. Battleships");
         System.out.println("5. ---");
 
     }
@@ -45,7 +46,7 @@ public class Main {
             case 1 -> rps.PlayGame();
             case 2 -> fortune.PlayGame();
             case 3 -> womble.PlayGame();
-            case 4 -> System.out.println("Game in progress...");
+            case 4 -> bships.PlayGame();
             case 5 -> System.out.println("Game in progress...");
         }
     }
