@@ -1,4 +1,3 @@
-import java.util.Scanner;
 /*
  * Fortune teller game based off Magic 8 Ball. Player asks a question and receives an answer
  * that is along the lines of yes or no.
@@ -10,7 +9,6 @@ class FortuneTeller {
     private String whom;
     private boolean playAgain;
 
-    private Scanner sc = new Scanner(System.in);
     private Input input = new Input();
 
     // Acts as the "main" method for this game class:
@@ -37,7 +35,7 @@ class FortuneTeller {
         while (!valid) {
             System.out.println("\nWhat is it you wish to ask " + whom + "?");
             System.out.print("> ");
-            question = sc.nextLine();
+            question = input.sc.nextLine();
             String[] words = question.split("\\s+");
 
             if (words.length > 0 && !words[0].isEmpty()) {

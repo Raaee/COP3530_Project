@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /// SUMMARY
 /*
  * This is a game of rock paper scissors that collects the player's input and compares it to a random choice of the computer.
@@ -7,7 +5,6 @@ import java.util.Scanner;
  */
 public class RockPaperScissors {
 
-    private Scanner sc = new Scanner(System.in);
     private String playerChoice, computerChoice;
     private String winner;
     private int amtPlayerWins = 0, amtComputerWins = 0;
@@ -62,7 +59,7 @@ public class RockPaperScissors {
         do {
             System.out.println("Choose your weapon:");
             System.out.println("Rock, Paper, or Scissors.");
-            playerChoice = sc.nextLine();
+            playerChoice = input.sc.nextLine();
 
             if (!playerChoice.equalsIgnoreCase("Rock") && !playerChoice.equalsIgnoreCase("Paper")
                     && !playerChoice.equalsIgnoreCase("Scissors")) {

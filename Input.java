@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 
 public class Input {
-    private static Scanner sc = new Scanner(System.in);
+    public Scanner sc = new Scanner(System.in);
 
     // This method is used to validate a choice input based on the number of choices
     // there are
@@ -57,10 +57,30 @@ public class Input {
         return playAgain;
     }
 
+    public String DifficultyMenu() {
+        String difficulty;
+        boolean loop;
+        do {
+            loop = false;
+            System.out.println("\nChoose a difficulty:");
+            System.out.println("1. Easy");
+            System.out.println("2. Mid");
+            System.out.println("3. Hard");
+            difficulty = sc.nextLine();
+
+            if (!difficulty.equals("1") && !difficulty.equals("2") && !difficulty.equals("3")) {
+                System.out.println("\nInvalid Choice.");
+                loop = true;
+            }
+
+        } while (loop);
+        return difficulty;
+    }
+
     // Generates random number:
     public int GetRandomNum(int origin, int bound) {
         Random ranNum = new Random();
-        return ranNum.nextInt(bound - origin + 1) + origin;
+        return ranNum.nextInt(bound - origin + 1) + origin; // Bound and Origin are included in random num
     }
 
     public char GetRandomChar(char start, char end) {

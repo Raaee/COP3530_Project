@@ -1,40 +1,57 @@
 import java.util.HashMap;
-import java.util.List;
 
 public class BattleshipsData {
 
     private Input input = new Input();
     private final int BOARD_SIZE = 10;
-    private HashMap<String, List<String>> board;
+    private HashMap<String, String> board_withShips;
+    private HashMap<String, String> bareBoard;
+    private HashMap<Integer, Integer> amtShipsOnBoard;
+    private final String hit = "x";
+    private final String miss = "~";
+    private int amtHitsToWin = 0;
 
     public void CreateBoard(String value) {
-        board = new HashMap<>();
+        board_withShips = new HashMap<>();
+        bareBoard = new HashMap<>();
+        amtShipsOnBoard = new HashMap<>();
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (char c = 'A'; c < 'A' + BOARD_SIZE; c++) {
-                board.put(c + Integer.toString(i), value); // MUST FIX TO FIT A CHAINING HASHMAP
+                board_withShips.put(c + Integer.toString(i), value);
+                bareBoard.put(c + Integer.toString(i), value);
             }
+        }
+        for (int i = 1; i <= 5; i++) {
+            amtShipsOnBoard.put(i, 0);
         }
     }
 
-    public void DisplayBoard() {
+    public void DisplayGameBoard(boolean boardWithShips) {
         int cellWidth = 5;
 
         // Displays Numbers
-        PrintPaddedValue(cellWidth, "");
+        PrintPaddedValue(cellWidth, "X");
         for (int i = 0; i < BOARD_SIZE; i++) {
             PrintPaddedValue(cellWidth, Integer.toString(i));
         }
         System.out.println("");
 
         // Displays Letters and Board Info
-        System.out.println(" ");
         for (char c = 'A'; c < 'A' + BOARD_SIZE; c++) {
             PrintPaddedValue(cellWidth, Character.toString(c));
             for (int i = 0; i < BOARD_SIZE; i++) {
-                PrintPaddedValue(cellWidth, board.get(c + Integer.toString(i)));
+                if (boardWithShips) {
+                    PrintPaddedValue(cellWidth, board_withShips.get(c + Integer.toString(i)));
+                } else {
+                    PrintPaddedValue(cellWidth, bareBoard.get(c + Integer.toString(i)));
+                }
             }
             System.out.println("\n");
+        }
+
+        for (int key : amtShipsOnBoard.keySet()) {
+            System.out.println("Ship Size: " + key + " ; " + amtShipsOnBoard.get(key));
         }
     }
 
@@ -42,8 +59,107 @@ public class BattleshipsData {
         System.out.print(String.format("%" + cellWidth + "s", cellValue));
     }
 
-    public void PlaceShips() {
-        char randomLetter = input.GetRandomChar('A', 'J');
-        System.out.println(randomLetter);
+    public void PlaceShips(int numShips) {
+        int[] shipSizes = { 1, 2, 3, 4, 5 };
+
+        for (int i = 0; i < numShips; i++) {
+            boolean validPos = true;
+
+            // Variables:
+            char randomLetter = input.GetRandomChar('A', 'J');
+            int randIndx = input.GetRandomNum(0, shipSizes.length - 1);
+            int shipSize = shipSizes[randIndx];
+
+            int row = GetRowNumber(randomLetter);
+            int col = input.GetRandomNum(0, BOARD_SIZE);
+            int direction = input.GetRandomNum(0, 1);
+
+            if (direction == 0) { // Horizontal direction
+                if (col + shipSize > BOARD_SIZE) {
+                    validPos = false;
+                } else {
+                    for (int n = col; n < col + shipSize; n++) {
+
+                        // Check current space
+                        if (!board_withShips.get(Character.toString(randomLetter) + Integer.toString(n)).equals("-")) {
+                            validPos = false;
+                            break;
+                        }
+                        // Checks if spaces to the left are valid
+                        if (n > 0
+                                && !board_withShips.get(Character.toString(randomLetter) + Integer.toString(n - 1))
+                                        .equals("-")) {
+                            validPos = false;
+                            break;
+                        }
+                        // Check if spaces to the right are valid
+                        if (n < BOARD_SIZE - 1
+                                && !board_withShips.get(Character.toString(randomLetter) + Integer.toString(n + 1))
+                                        .equals("-")) {
+                            validPos = false;
+                            break;
+                        }
+                    }
+                }
+                if (validPos) {
+                    for (int q = col; q < col + shipSize; q++) {
+                        board_withShips.put(Character.toString(randomLetter) + Integer.toString(q),
+                                Integer.toString(shipSize));
+                    }
+                    amtShipsOnBoard.put(shipSize, amtShipsOnBoard.get(shipSize) + 1);
+                    amtHitsToWin += shipSize;
+                }
+
+            } else if (direction == 1) { // Vertical direction
+                if (row + shipSize > BOARD_SIZE) {
+                    validPos = false;
+                } else {
+                    for (int o = row; o < row + shipSize; o++) {
+                        for (int c = 0; c < BOARD_SIZE; c++) {
+                            if (!board_withShips.get(Character.toString((char) ('A' + c)) + Integer.toString(o))
+                                    .equals("-")) {
+                                validPos = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (validPos) {
+                        for (int x = row; x < row + shipSize; x++) {
+                            board_withShips.put(Character.toString((char) ('A' + x)) + Integer.toString(col),
+                                    Integer.toString(shipSize));
+                        }
+                        amtShipsOnBoard.put(shipSize, amtShipsOnBoard.get(shipSize) + 1);
+                        amtHitsToWin += shipSize;
+                    }
+                }
+            }
+            if (!validPos) {
+                i--;
+                validPos = true;
+            }
+        }
+    }
+
+    public int GetRowNumber(char letter) {
+        int rowNumber = -1;
+        if (letter >= 'A' && letter <= 'J') {
+            rowNumber = letter - 'A';
+        }
+        return rowNumber;
+    }
+
+    public void CheckPosition(char row, int col) {
+        if (!board_withShips.get(Character.toString(row) + Integer.toString(col)).equals("-")) {
+            bareBoard.put(Character.toString(row) + Integer.toString(col), hit);
+            System.out.println("Hit! ~ *");
+            amtHitsToWin--;
+        } else {
+            bareBoard.put(Character.toString(row) + Integer.toString(col), miss);
+            System.out.println("Miss.");
+        }
+    }
+
+    public int GetAmtHitsToWin() {
+        return amtHitsToWin;
     }
 }
