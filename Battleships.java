@@ -7,16 +7,18 @@ public class Battleships extends BattleshipsData {
         System.out.println("\n\t ~~ Welcome to a game of Battleship! ~~");
 
         CreateBoard("-");
+        PrintRules();
         DifficultyMenu();
-        DisplayBoard(true);
+        // DisplayBoard(true); // TEMP FOR DEBUGGING
 
         while (GetAmtHitsToWin() > 0) {
             DisplayBoard(false);
-            System.out.println("Amount hits to win: " + GetAmtHitsToWin());
+            DisplayShipsOnBattlefield();
+            System.out.println("\nAmount hits to win: " + GetAmtHitsToWin());
+            System.out.println("Total moves made: " + GetAmtMoves());
             GetPlayerGuess();
             CheckPosition();
         }
-
     }
 
     public void DisplayBoard(boolean boardWithShips) {
@@ -37,8 +39,9 @@ public class Battleships extends BattleshipsData {
             System.out.println("\nEnter location to hit:");
             System.out.print("> ");
             playerGuess = input.sc.nextLine();
-            if (!playerGuess.matches("[a-zA-Z]\\d")) {
-                System.out.println("Location must be a letter followed by a number.");
+            if (!playerGuess.matches("[a-jA-J]\\d")) {
+                System.out.println("~~ Location must be a letter followed by a number. ~~");
+                System.out.println("~~ Letter must be within the board coordinates. ~~");
                 loop = true;
             }
         } while (loop);
@@ -56,7 +59,12 @@ public class Battleships extends BattleshipsData {
     public void PrintRules() {
         System.out.println("\nRules:");
         System.out.println("------------");
+        System.out.println("> You will guess the location of ships in the battlefield.");
         System.out.println("> To guess a location to hit, use \"A0\" formatting");
+        System.out.println("> Spaces with a \"-\" mean it has not been guessed.");
+        System.out.println("> Spaces that have been replaced by a \"~\" mean there is no ship in that location");
+        System.out.println("> Spaces replaced by an \"x\" mean a ship has been hit.");
+        System.out.println("> Hit all ship points to win.");
     }
 
 }

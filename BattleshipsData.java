@@ -10,6 +10,7 @@ public class BattleshipsData {
     private final String hit = "x";
     private final String miss = "~";
     private int amtHitsToWin = 0;
+    private int amtMoves = 0;
 
     public void CreateBoard(String value) {
         board_withShips = new HashMap<>();
@@ -35,7 +36,7 @@ public class BattleshipsData {
         for (int i = 0; i < BOARD_SIZE; i++) {
             PrintPaddedValue(cellWidth, Integer.toString(i));
         }
-        System.out.println("");
+        System.out.println("\n");
 
         // Displays Letters and Board Info
         for (char c = 'A'; c < 'A' + BOARD_SIZE; c++) {
@@ -49,9 +50,14 @@ public class BattleshipsData {
             }
             System.out.println("\n");
         }
+    }
 
+    public void DisplayShipsOnBattlefield() {
+        System.out.println("\nAmount of ships present in the battlefield:");
+        System.out.println("------------");
         for (int key : amtShipsOnBoard.keySet()) {
-            System.out.println("Ship Size: " + key + " ; " + amtShipsOnBoard.get(key));
+            System.out.println("Ship Size: " + key + " ; " +
+                    amtShipsOnBoard.get(key));
         }
     }
 
@@ -153,13 +159,19 @@ public class BattleshipsData {
             bareBoard.put(Character.toString(row) + Integer.toString(col), hit);
             System.out.println("Hit! ~ *");
             amtHitsToWin--;
+            amtMoves++;
         } else {
             bareBoard.put(Character.toString(row) + Integer.toString(col), miss);
-            System.out.println("Miss.");
+            System.out.println("x ~ Miss.");
+            amtMoves++;
         }
     }
 
     public int GetAmtHitsToWin() {
         return amtHitsToWin;
+    }
+
+    public int GetAmtMoves() {
+        return amtMoves;
     }
 }
