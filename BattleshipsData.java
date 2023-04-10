@@ -54,9 +54,9 @@ public class BattleshipsData {
 
     public void DisplayShipsOnBattlefield() {
         System.out.println("\nAmount of ships present in the battlefield:");
-        System.out.println("------------");
+        System.out.println("----------------");
         for (int key : amtShipsOnBoard.keySet()) {
-            System.out.println("Ship Size: " + key + " ; " +
+            System.out.println("Ship Size " + key + ":   " +
                     amtShipsOnBoard.get(key));
         }
     }

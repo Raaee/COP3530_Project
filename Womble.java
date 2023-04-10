@@ -78,11 +78,20 @@ public class Womble extends WombleWordsData {
             loop = false;
             System.out.println("\nEnter your guess:");
             playerGuess = input.sc.nextLine();
-            if (playerGuess.length() < 5 || playerGuess.length() > 5) {
+            playerGuess = playerGuess.toUpperCase();
+
+            if ((playerGuess.length() < 5 || playerGuess.length() > 5) && !playerGuess.equalsIgnoreCase("Rules")) {
                 System.out.println("Word must be 5 letters.");
                 loop = true;
             }
         } while (loop);
+        // ************ FIX **********
+        switch (playerGuess) {
+            case "RULES" -> PrintRules();
+            default -> {
+
+            }
+        }
     }
 
     // Method that checks if the player's guess exists in the correct word:
@@ -137,6 +146,7 @@ public class Womble extends WombleWordsData {
         System.out.println("> Letters that do not change, mean they are in the correct spot.");
         System.out.println("> If the word is not guessed, within the 6 attempts, you lose.");
 
+        System.out.println("** If anytime you wish to see the rules again, type in \"Rules\" **\n");
         System.out.println("Good Luck!\n");
     }
 

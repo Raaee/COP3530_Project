@@ -17,7 +17,11 @@ public class Battleships extends BattleshipsData {
             System.out.println("\nAmount hits to win: " + GetAmtHitsToWin());
             System.out.println("Total moves made: " + GetAmtMoves());
             GetPlayerGuess();
-            CheckPosition();
+        }
+        if (GetAmtHitsToWin() < 1) {
+            String spaces = "     ";
+            DisplayBoard(false);
+            System.out.println("\t\t" + spaces + "Congrats! You won! ~ *\n\n");
         }
     }
 
@@ -39,20 +43,25 @@ public class Battleships extends BattleshipsData {
             System.out.println("\nEnter location to hit:");
             System.out.print("> ");
             playerGuess = input.sc.nextLine();
-            if (!playerGuess.matches("[a-jA-J]\\d")) {
+            if (!playerGuess.matches("[a-jA-J]\\d") && !playerGuess.equalsIgnoreCase("Rules")) {
                 System.out.println("~~ Location must be a letter followed by a number. ~~");
                 System.out.println("~~ Letter must be within the board coordinates. ~~");
                 loop = true;
             }
         } while (loop);
         playerGuess = playerGuess.toUpperCase();
+
+        switch (playerGuess) {
+            case "RULES" -> PrintRules();
+            default -> CheckPosition();
+        }
     }
 
     public void DifficultyMenu() {
         switch (input.DifficultyMenu()) {
             case "1" -> PlaceShips(10);
             case "2" -> PlaceShips(7);
-            case "3" -> PlaceShips(4);
+            case "3" -> PlaceShips(1);
         }
     }
 
@@ -65,6 +74,7 @@ public class Battleships extends BattleshipsData {
         System.out.println("> Spaces that have been replaced by a \"~\" mean there is no ship in that location");
         System.out.println("> Spaces replaced by an \"x\" mean a ship has been hit.");
         System.out.println("> Hit all ship points to win.");
+        System.out.println("** If anytime you wish to see the rules again, type in \"Rules\" **\n");
     }
 
 }

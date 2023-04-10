@@ -1,5 +1,5 @@
 /*
- * This is the main menu class. This file holds main and is the class that displays and manages the 
+ * This is the main menu class. This file holds main and is the class that displays and manages the 3
  * type of games available to play.
  */
 public class Main {

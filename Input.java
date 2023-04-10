@@ -87,4 +87,12 @@ public class Input {
         return (char) GetRandomNum((int) 'A', (int) 'J');
     }
 
+    public boolean ReprintRules(Object playerGuess) {
+        if (playerGuess.toString().equalsIgnoreCase("Rules")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
