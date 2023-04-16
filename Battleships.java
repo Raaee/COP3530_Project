@@ -6,7 +6,7 @@ public class Battleships extends BattleshipsData {
     public void PlayGame() {
         System.out.println("\n\t ~~ Welcome to a game of Battleship! ~~");
 
-        CreateBoard("-");
+        CreateBoard("=");
         PrintRules();
         DifficultyMenu();
         // DisplayBoard(true); // TEMP FOR DEBUGGING

@@ -11,8 +11,10 @@ public class BattleshipsData {
     private final String miss = "~";
     private int amtHitsToWin = 0;
     private int amtMoves = 0;
+    private String boardSpaceValue;
 
     public void CreateBoard(String value) {
+        boardSpaceValue = value;
         board_withShips = new HashMap<>();
         bareBoard = new HashMap<>();
         amtShipsOnBoard = new HashMap<>();
@@ -87,21 +89,21 @@ public class BattleshipsData {
                     for (int n = col; n < col + shipSize; n++) {
 
                         // Check current space
-                        if (!board_withShips.get(Character.toString(randomLetter) + Integer.toString(n)).equals("-")) {
+                        if (!board_withShips.get(Character.toString(randomLetter) + Integer.toString(n)).equals(boardSpaceValue)) {
                             validPos = false;
                             break;
                         }
                         // Checks if spaces to the left are valid
                         if (n > 0
                                 && !board_withShips.get(Character.toString(randomLetter) + Integer.toString(n - 1))
-                                        .equals("-")) {
+                                        .equals(boardSpaceValue)) {
                             validPos = false;
                             break;
                         }
                         // Check if spaces to the right are valid
                         if (n < BOARD_SIZE - 1
                                 && !board_withShips.get(Character.toString(randomLetter) + Integer.toString(n + 1))
-                                        .equals("-")) {
+                                        .equals(boardSpaceValue)) {
                             validPos = false;
                             break;
                         }
@@ -123,7 +125,7 @@ public class BattleshipsData {
                     for (int o = row; o < row + shipSize; o++) {
                         for (int c = 0; c < BOARD_SIZE; c++) {
                             if (!board_withShips.get(Character.toString((char) ('A' + c)) + Integer.toString(o))
-                                    .equals("-")) {
+                                    .equals(boardSpaceValue)) {
                                 validPos = false;
                                 break;
                             }
@@ -155,7 +157,7 @@ public class BattleshipsData {
     }
 
     public void CheckPosition(char row, int col) {
-        if (!board_withShips.get(Character.toString(row) + Integer.toString(col)).equals("-")) {
+        if (!board_withShips.get(Character.toString(row) + Integer.toString(col)).equals(boardSpaceValue)) {
             bareBoard.put(Character.toString(row) + Integer.toString(col), hit);
             System.out.println("Hit! ~ *");
             amtHitsToWin--;
