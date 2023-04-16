@@ -1,17 +1,14 @@
-import java.util.Scanner;
 /*
  * This is a word guessing game. Based off of the NewYork Time's Web game, Wordle.
  * Player attempts to guess a word within 6 tries of receiving letter position feedback.
  */
 
-public class Womble {
+public class Womble extends WombleWordsData {
 
-    private Scanner sc = new Scanner(System.in);
     private String playerGuess;
     private String output = "";
 
     private Input input = new Input();
-    private WombleWordsData wombleWordsData = new WombleWordsData();
     private String[] wordsToGuess;
     private String correctWord;
 
@@ -80,12 +77,21 @@ public class Womble {
         do {
             loop = false;
             System.out.println("\nEnter your guess:");
-            playerGuess = sc.nextLine();
-            if (playerGuess.length() < 5 || playerGuess.length() > 5) {
+            playerGuess = input.sc.nextLine();
+            playerGuess = playerGuess.toUpperCase();
+
+            if ((playerGuess.length() < 5 || playerGuess.length() > 5) && !playerGuess.equalsIgnoreCase("Rules")) {
                 System.out.println("Word must be 5 letters.");
                 loop = true;
             }
         } while (loop);
+        // ************ FIX **********
+        switch (playerGuess) {
+            case "RULES" -> PrintRules();
+            default -> {
+
+            }
+        }
     }
 
     // Method that checks if the player's guess exists in the correct word:
@@ -113,27 +119,10 @@ public class Womble {
     // Displays difficulty selection menu and assigns a difficulty according to the
     // input:
     public void DifficultyMenu() {
-        String difficulty;
-        boolean loop;
-        do {
-            loop = false;
-            System.out.println("\nChoose a difficulty:");
-            System.out.println("1. Easy");
-            System.out.println("2. Mid");
-            System.out.println("3. Hard");
-            difficulty = sc.nextLine();
-
-            if (!difficulty.equals("1") && !difficulty.equals("2") && !difficulty.equals("3")) {
-                System.out.println("\nInvalid Choice.");
-                loop = true;
-            }
-
-        } while (loop);
-
-        switch (difficulty) {
-            case "1" -> wordsToGuess = wombleWordsData.EasyWords();
-            case "2" -> wordsToGuess = wombleWordsData.MidWords();
-            case "3" -> wordsToGuess = wombleWordsData.HardWords();
+        switch (input.DifficultyMenu()) {
+            case "1" -> wordsToGuess = EasyWords();
+            case "2" -> wordsToGuess = MidWords();
+            case "3" -> wordsToGuess = HardWords();
         }
     }
 
@@ -157,6 +146,7 @@ public class Womble {
         System.out.println("> Letters that do not change, mean they are in the correct spot.");
         System.out.println("> If the word is not guessed, within the 6 attempts, you lose.");
 
+        System.out.println("** If anytime you wish to see the rules again, type in \"Rules\" **\n");
         System.out.println("Good Luck!\n");
     }
 
