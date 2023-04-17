@@ -86,13 +86,4 @@ public class Input {
     public char GetRandomChar(char start, char end) {
         return (char) GetRandomNum((int) 'A', (int) 'J');
     }
-
-    public boolean ReprintRules(Object playerGuess) {
-        if (playerGuess.toString().equalsIgnoreCase("Rules")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
