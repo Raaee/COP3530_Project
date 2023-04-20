@@ -162,6 +162,7 @@ public class BlackJack extends PlayerBJK {
         System.out.println("> However, if it is not a blackjack, the dealer will hit.");
         System.out.println("> First player to 21 or closest to 21: wins.");
 
+        System.out.println(" ");
         System.out.println("> Face cards (Jack, Queen, King) are worth 10.");
         System.out.println("> Aces are worth 1 or 11.");
         System.out.println("> Number cards keep their values.");
