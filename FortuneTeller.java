@@ -3,7 +3,7 @@
  * that is along the lines of yes or no.
  */
 
-class FortuneTeller {
+ class FortuneTeller {
 
     private String question;
     private String whom;
@@ -13,7 +13,7 @@ class FortuneTeller {
     private Input input = new Input();
 
     // Acts as the "main" method for this game class:
-    public void PlayGame() {
+    public void PlayGame() throws InterruptedException {
 
         System.out.println("\n~~ Greetings! We are your Fortune Teller ~~");
         System.out.println("\t     Ask us anything.");
@@ -85,7 +85,7 @@ class FortuneTeller {
         System.out.println("Our words do not lie.");
         System.out.println("However, our powers limit us in communication.");
         System.out.println("We can only respond with minimal words.");
-        System.out.println("** If anytime you wish to see the rules again, type in \"Rules\" **\n");
+        System.out.println("** If at anytime you wish to see the rules again, type in \"Rules\" **\n");
     }
 
 }

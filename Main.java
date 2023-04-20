@@ -16,14 +16,14 @@ public class Main {
     private static Main Instance = new Main();
     private static Input input = new Input();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         MainMenu();
     }
 
     // Separate MainMenu method is used to allow the main menu to be displayed when
     // the player wishes
     // to return to the main menu:
-    public static void MainMenu() {
+    public static void MainMenu() throws InterruptedException {
         PrintMenu();
         StartGame(input.ChoiceInput(1, 5));
     }
@@ -41,7 +41,7 @@ public class Main {
     }
 
     // Method that starts the actual game based on the player's choice:
-    public static void StartGame(int choice) {
+    public static void StartGame(int choice) throws InterruptedException {
         switch (choice) {
             case 1 -> rps.PlayGame();
             case 2 -> fortune.PlayGame();
