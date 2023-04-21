@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /*
- *    SUMMARY OF CLASS GOES HERE
+ *    This class is for the player, where it creates the player hand and gets the player's total.
  */
 public class PlayerBJK extends Dealer {
     private int total = 0;
