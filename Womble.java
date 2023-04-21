@@ -3,7 +3,7 @@
  * Player attempts to guess a word within 6 tries of receiving letter position feedback.
  */
 
-public class Womble extends WombleWordsData {
+ public class Womble extends WombleWordsData {
 
     private String playerGuess;
     private String output = "";
@@ -18,7 +18,7 @@ public class Womble extends WombleWordsData {
     private int tries = 6;
 
     // Acts as the "main" method for this game class:
-    public void PlayGame() {
+    public void PlayGame() throws InterruptedException {
         do {
             ResetGame();
 
@@ -143,7 +143,7 @@ public class Womble extends WombleWordsData {
         System.out.println("> Letters that do not change, mean they are in the correct spot.");
         System.out.println("> If the word is not guessed, within the 6 attempts, you lose.");
 
-        System.out.println("** If anytime you wish to see the rules again, type in \"Rules\" **\n");
+        System.out.println("** If at anytime you wish to see the rules again, type in \"Rules\" **\n");
         System.out.println("Good Luck!\n");
     }
 

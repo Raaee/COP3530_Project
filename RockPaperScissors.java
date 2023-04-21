@@ -17,7 +17,7 @@ public class RockPaperScissors {
     private Input input = new Input();
 
     // Acts as the "main" method for this game class:
-    public void PlayGame() {
+    public void PlayGame() throws InterruptedException {
 
         do {
             ResetGame();

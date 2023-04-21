@@ -9,21 +9,21 @@ public class Main {
     private static Womble womble = new Womble();
     private static RockPaperScissors rps = new RockPaperScissors();
     private static FortuneTeller fortune = new FortuneTeller();
-
     private static Battleships bships = new Battleships();
+    private static BlackJack blackJack = new BlackJack();
 
     // Main Menu Variables:
     private static Main Instance = new Main();
     private static Input input = new Input();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         MainMenu();
     }
 
     // Separate MainMenu method is used to allow the main menu to be displayed when
     // the player wishes
     // to return to the main menu:
-    public static void MainMenu() {
+    public static void MainMenu() throws InterruptedException {
         PrintMenu();
         StartGame(input.ChoiceInput(1, 5));
     }
@@ -36,18 +36,18 @@ public class Main {
         System.out.println("2. Fortune Teller");
         System.out.println("3. Womble");
         System.out.println("4. Battleships");
-        System.out.println("5. ---");
+        System.out.println("5. Blackjack");
 
     }
 
     // Method that starts the actual game based on the player's choice:
-    public static void StartGame(int choice) {
+    public static void StartGame(int choice) throws InterruptedException {
         switch (choice) {
             case 1 -> rps.PlayGame();
             case 2 -> fortune.PlayGame();
             case 3 -> womble.PlayGame();
             case 4 -> bships.PlayGame();
-            case 5 -> System.out.println("Game in progress...");
+            case 5 -> blackJack.PlayGame();
         }
     }
 

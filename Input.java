@@ -5,6 +5,7 @@ import java.util.Scanner;
  * This file is used to keep all methods that are repeatedly used throughout the project. 
  * This is to prevent repetition of code and to keep things organized.
  */
+import java.util.concurrent.TimeUnit;
 
 public class Input {
     public Scanner sc = new Scanner(System.in);
@@ -37,7 +38,7 @@ public class Input {
 
     // Method used to ask the player if they would wish to play again after every
     // game:
-    public boolean PlayAgain() {
+    public boolean PlayAgain() throws InterruptedException {
         boolean playAgain = false;
 
         System.out.println("\nChoose an option:");
@@ -86,4 +87,24 @@ public class Input {
     public char GetRandomChar(char start, char end) {
         return (char) GetRandomNum((int) 'A', (int) 'J');
     }
+    
+    public boolean ReprintRules(Object playerGuess) {
+        if (playerGuess.toString().equalsIgnoreCase("Rules")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // MESSAGE ** MUST ** BE A 3 CHARACTER STRING:
+    public void Delay(String message, int timeoutInMiliseconds) throws InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(timeoutInMiliseconds / 2);
+        System.out.print(message.charAt(0));
+        TimeUnit.MILLISECONDS.sleep(timeoutInMiliseconds);
+        System.out.print(message.charAt(1));
+        TimeUnit.MILLISECONDS.sleep(timeoutInMiliseconds);
+        System.out.println(message.charAt(2));
+        TimeUnit.MILLISECONDS.sleep(timeoutInMiliseconds);
+    }
+
 }

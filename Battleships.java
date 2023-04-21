@@ -86,7 +86,7 @@ public class Battleships extends BattleshipsData {
         System.out.println("> Spaces that have been replaced by a \"~\" mean there is no ship in that location");
         System.out.println("> Spaces replaced by an \"x\" mean a ship has been hit.");
         System.out.println("> Hit all ship points to win.");
-        System.out.println("** If anytime you wish to see the rules again, type in \"Rules\" **\n");
+        System.out.println("** If at anytime you wish to see the rules again, type in \"Rules\" **\n");
     }
 
 }
