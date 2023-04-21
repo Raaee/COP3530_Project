@@ -1,12 +1,11 @@
-import java.util.Queue;
 /*
  *    summary
  */
 public class BlackJack extends PlayerBJK {
     private Input input = new Input();
 
-    private boolean playerWon = false, dealerWon = false, playAgain = true, bust = false;
-    private boolean canPlay = true, push = false;
+    private boolean playerWon = false, dealerWon = false, playAgain = true;
+    private boolean playersTurn = true, push = false;
 
     public void PlayGame() throws InterruptedException {
         do {
@@ -17,12 +16,12 @@ public class BlackJack extends PlayerBJK {
             input.Delay("...", 500);
             StartGame();
 
-            while (canPlay && !bust && !playerWon && !dealerWon) {
+            while (playersTurn && !playerWon && !dealerWon) {
                 PrintHands();
                 EvaluateInput();
             }
 
-            if (bust || playerWon || dealerWon || push) {
+            if (playerWon || dealerWon || push) {
                 PrintHands();
                 WinningMessage();
                 playAgain = input.PlayAgain();
@@ -39,7 +38,7 @@ public class BlackJack extends PlayerBJK {
     public void WinningMessage() {
         if (playerWon) {
             System.out.println("\nCongrats! You Win ~ *");
-        } else if (dealerWon || bust) {
+        } else if (dealerWon) {
             System.out.println("\nDealer wins.");
         } else if (push) {
             System.out.println("\nTie.");
@@ -51,9 +50,8 @@ public class BlackJack extends PlayerBJK {
         SetPlayerTotal(0);
         dealerWon = false;
         playerWon = false;
-        bust = false;
         playAgain = true;
-        canPlay = true;
+        playersTurn = true;
         MakeDeck();
     }
 
@@ -65,32 +63,25 @@ public class BlackJack extends PlayerBJK {
     }
 
     public void EvaluateTotal() {
-        if (GetPlayerTotal() == 21) {
+        if (GetPlayerTotal() == 21 || GetDealerTotal() > 21) {
             playerWon = true;
         }
-        if (GetPlayerTotal() > 21) {
+        if (GetPlayerTotal() > 21 || GetDealerTotal() == 21) {
             dealerWon = true;
         }
-        if (GetDealerTotal() > 21) {
-            playerWon = true;
-        }
-        if (GetDealerTotal() == 21) {
-            dealerWon = true;
-        }
-        if (!canPlay && GetPlayerTotal() == GetDealerTotal()) {
+        if (!playersTurn && GetPlayerTotal() == GetDealerTotal()) {
             push = true;
             playerWon = false;
             dealerWon = false;
-        } else if (!canPlay && GetPlayerTotal() > GetDealerTotal()) {
-            playerWon = true;
-        } else if (!canPlay && GetPlayerTotal() < GetDealerTotal()) {
+        } else if (!playersTurn && GetPlayerTotal() < GetDealerTotal()) {
             dealerWon = true;
-        }
-
+        } else if (!playersTurn && GetPlayerTotal() > GetDealerTotal()) {
+            playerWon = true;
+        } 
     }
 
     public void EvaluateInput() throws InterruptedException {
-        if (canPlay) {
+        if (playersTurn) {
             System.out.println("\nChoose an action:");
             System.out.println("1. Hit");
             System.out.println("2. Stand");
@@ -103,7 +94,7 @@ public class BlackJack extends PlayerBJK {
                     System.out.println(" ");
                 }
                 case 2 -> {
-                    canPlay = false;
+                    playersTurn = false;
                     DealerTurn();
                 }
                 case 3 -> PrintRules();
@@ -113,38 +104,26 @@ public class BlackJack extends PlayerBJK {
 
     public void DealerTurn() throws InterruptedException {
         RevealHoleCard();
-        if (!dealerWon && !(GetDealerTotal() == 21)) {
+        if (!dealerWon && GetDealerTotal() != 21) {
             while (GetDealerTotal() < 17) {
                 AddDealerCard();
             }
             EvaluateTotal();
         } else {
-            return;
+            EvaluateTotal();
         }
     }
 
     public void RevealHoleCard() throws InterruptedException {
         System.out.print("\nRevealing Dealer Hole Card");
         input.Delay("...", 400);
+        
         System.out.print("Hole Card: ");
         System.out.println(GetHoleCard());
         AddHoleCard();
+        
         System.out.println("Dealer's Total: " + GetDealerTotal());
-        EvaluateTotal();
         input.Delay("   ", 200);
-    }
-
-    public int WhichTotal(Queue<Card> hand, int total) {
-        for (Card card : hand) {
-            if (card.GetRank().equalsIgnoreCase("Ace") && total < 10) {
-                total += 11;
-            } else if (card.GetRank().equalsIgnoreCase("Ace") && total > 1) {
-                total += 1;
-            } else {
-                total += card.GetRankValue(card.GetRank(), total);
-            }
-        }
-        return total;
     }
 
     public void PrintRules() {
