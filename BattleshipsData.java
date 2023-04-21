@@ -89,7 +89,8 @@ public class BattleshipsData {
                     for (int n = col; n < col + shipSize; n++) {
 
                         // Check current space
-                        if (!board_withShips.get(Character.toString(randomLetter) + Integer.toString(n)).equals(boardSpaceValue)) {
+                        if (!board_withShips.get(Character.toString(randomLetter) + Integer.toString(n))
+                                .equals(boardSpaceValue)) {
                             validPos = false;
                             break;
                         }
@@ -175,5 +176,9 @@ public class BattleshipsData {
 
     public int GetAmtMoves() {
         return amtMoves;
+    }
+
+    public void SetAmtMoves(int n) {
+        amtMoves = n;
     }
 }

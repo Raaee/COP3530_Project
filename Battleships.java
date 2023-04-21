@@ -2,27 +2,39 @@ public class Battleships extends BattleshipsData {
 
     private Input input = new Input();
     private String playerGuess;
+    private boolean playAgain;
+    private boolean won;
 
     public void PlayGame() {
-        System.out.println("\n\t ~~ Welcome to a game of Battleship! ~~");
+        do {
+            SetAmtMoves(0);
+            won = false;
 
-        CreateBoard("=");
-        PrintRules();
-        DifficultyMenu();
-        // DisplayBoard(true); // TEMP FOR DEBUGGING
+            System.out.println("\n\t ~~ Welcome to a game of Battleship! ~~");
 
-        while (GetAmtHitsToWin() > 0) {
-            DisplayBoard(false);
-            DisplayShipsOnBattlefield();
-            System.out.println("\nAmount hits to win: " + GetAmtHitsToWin());
-            System.out.println("Total moves made: " + GetAmtMoves());
-            GetPlayerGuess();
-        }
-        if (GetAmtHitsToWin() < 1) {
-            String spaces = "     ";
-            DisplayBoard(false);
-            System.out.println("\t\t" + spaces + "Congrats! You won! ~ *\n\n");
-        }
+            CreateBoard("=");
+            PrintRules();
+            DifficultyMenu();
+            playAgain = true;
+            DisplayBoard(true); // TEMP FOR DEBUGGING
+
+            while (GetAmtHitsToWin() > 0) {
+                DisplayBoard(false);
+                DisplayShipsOnBattlefield();
+                System.out.println("\nAmount hits to win: " + GetAmtHitsToWin());
+                System.out.println("Total moves made: " + GetAmtMoves());
+                GetPlayerGuess();
+            }
+            if (GetAmtHitsToWin() < 1) {
+                String spaces = "     ";
+                DisplayBoard(false);
+                System.out.println("\t\t" + spaces + "Congrats! You won! ~ *\n\n");
+                won = true;
+            }
+            if (won) {
+                playAgain = input.PlayAgain();
+            }
+        } while (playAgain);
     }
 
     public void DisplayBoard(boolean boardWithShips) {

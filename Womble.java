@@ -32,14 +32,11 @@
                 System.out.println("Tries Left: " + tries);
 
                 GetPlayerGuess();
-                EvaluateGuess();
                 PrintOutput();
                 ResetOutput();
 
                 if (won)
                     tries = 0;
-                else
-                    tries--;
             } while (tries > 0);
 
             EndingMessage();
@@ -85,12 +82,11 @@
                 loop = true;
             }
         } while (loop);
-        // ************ FIX **********
+        playerGuess = playerGuess.toUpperCase();
+
         switch (playerGuess) {
             case "RULES" -> PrintRules();
-            default -> {
-
-            }
+            default -> EvaluateGuess();
         }
     }
 
@@ -114,6 +110,7 @@
                 output = output.toUpperCase();
             }
         }
+        tries--;
     }
 
     // Displays difficulty selection menu and assigns a difficulty according to the
