@@ -87,14 +87,6 @@ public class Input {
     public char GetRandomChar(char start, char end) {
         return (char) GetRandomNum((int) 'A', (int) 'J');
     }
-    
-    public boolean ReprintRules(Object playerGuess) {
-        if (playerGuess.toString().equalsIgnoreCase("Rules")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     // MESSAGE ** MUST ** BE A 3 CHARACTER STRING:
     public void Delay(String message, int timeoutInMiliseconds) throws InterruptedException {

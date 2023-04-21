@@ -5,7 +5,7 @@ public class Battleships extends BattleshipsData {
     private boolean playAgain;
     private boolean won;
 
-    public void PlayGame() {
+    public void PlayGame() throws InterruptedException {
         do {
             SetAmtMoves(0);
             won = false;
