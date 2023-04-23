@@ -1,13 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 /* 
 * This is a class that provides a list of words to be used in the Word Scramble game. 
 * It includes methods to retrieve the list of words, display them to the user, randomly 
 * select words to be scrambled, and scramble the words. The class also includes an inner 
 * Input class that generates random numbers for word selection and scrambling.
 */
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class WordScrambleData {
 
     public Input input = new Input();

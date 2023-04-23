@@ -1,11 +1,9 @@
+import java.util.HashMap;
 /*
  * This is class utilizes HashMaps to create and manage the game board of the Battleships class.
  * It includes methods to create the game board, display it, place ships on it, and print padded values. 
  * It also keeps track of the number of ships present in the game and the number of hits required to win the game.
  */
-
-import java.util.HashMap;
-
 public class BattleshipsData {
 
     private Input input = new Input();

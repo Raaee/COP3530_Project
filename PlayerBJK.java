@@ -1,9 +1,8 @@
+import java.util.LinkedList;
+import java.util.Queue;
 /*
  *    This class is for the player, where it creates the player hand and gets the player's total.
  */
-
-import java.util.LinkedList;
-import java.util.Queue;
 public class PlayerBJK extends Dealer {
     private int total = 0;
     private Queue<Card> playerHand;

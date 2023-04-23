@@ -4,12 +4,12 @@
  * player selects the level of difficulty. The player then enters their guesses, with the game providing 
  * feedback on the number of hits and misses. The game continues until the player has sunk all of the ships 
  * or used up all their guesses.
- */
-public class Battleships extends BattleshipsData {
-/**
+ * 
  * Battleships is a strategy guessing game played on a grid of squares. 
  * Players take turns guessing the location of their opponent's ships by calling out coordinates on the grid.
  */
+public class Battleships extends BattleshipsData {
+
     private Input input = new Input();
     private String playerGuess;
     private boolean playAgain;
@@ -26,7 +26,7 @@ public class Battleships extends BattleshipsData {
             PrintRules();
             DifficultyMenu();
             playAgain = true;
-            DisplayBoard(true); // TEMP FOR DEBUGGING
+          //  DisplayBoard(true); // TEMP FOR DEBUGGING
 
             while (GetAmtHitsToWin() > 0) {
                 DisplayBoard(false);
@@ -83,7 +83,7 @@ public class Battleships extends BattleshipsData {
         switch (input.DifficultyMenu()) {
             case "1" -> PlaceShips(10);
             case "2" -> PlaceShips(7);
-            case "3" -> PlaceShips(1);
+            case "3" -> PlaceShips(3);
         }
     }
 

@@ -10,8 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class Input {
     public Scanner sc = new Scanner(System.in);
 
-    // This method is used to validate a choice input based on the number of choices
-    // there are
+    // This method is used to validate a choice input based on the number of choices there are
     // method returns the choice # that was inputted after it has been validated:
     public int ChoiceInput(int min, int max) {
         boolean valid = false;
@@ -36,8 +35,7 @@ public class Input {
         return choice;
     }
 
-    // Method used to ask the player if they would wish to play again after every
-    // game:
+    // Method used to ask the player if they would wish to play again after every game:
     public boolean PlayAgain() throws InterruptedException {
         boolean playAgain = false;
 
