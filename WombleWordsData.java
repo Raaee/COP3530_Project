@@ -1,3 +1,8 @@
+/* 
+* This class provides a variety of words within three methods: EasyWords, MidWords, and HardWords. 
+* Each method returns an array of strings that contains words of varying difficulty levels of the Womble word game.
+*/
+
 public class WombleWordsData {
 
     public String[] EasyWords() {

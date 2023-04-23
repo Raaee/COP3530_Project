@@ -11,6 +11,7 @@ public class Main {
     private static FortuneTeller fortune = new FortuneTeller();
     private static Battleships bships = new Battleships();
     private static BlackJack blackJack = new BlackJack();
+    private static WordScramble wordScramble = new WordScramble();
 
     // Main Menu Variables:
     private static Main Instance = new Main();
@@ -25,7 +26,7 @@ public class Main {
     // to return to the main menu:
     public static void MainMenu() throws InterruptedException {
         PrintMenu();
-        StartGame(input.ChoiceInput(1, 5));
+        StartGame(input.ChoiceInput(1, 6));
     }
 
     // Displays Main Menu of all available games:
@@ -37,6 +38,7 @@ public class Main {
         System.out.println("3. Womble");
         System.out.println("4. Battleships");
         System.out.println("5. Blackjack");
+        System.out.println("6. Word Scramble");
 
     }
 
@@ -48,6 +50,7 @@ public class Main {
             case 3 -> womble.PlayGame();
             case 4 -> bships.PlayGame();
             case 5 -> blackJack.PlayGame();
+            case 6 -> wordScramble.PlayGame();
         }
     }
 

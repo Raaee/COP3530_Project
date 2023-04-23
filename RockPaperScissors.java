@@ -1,8 +1,8 @@
-/// SUMMARY
 /*
  * This is a game of rock paper scissors that collects the player's input and compares it to a random choice of the computer.
  * It uses String and arrays to store the data of the player and computer choice as well as their wins and loses.
  */
+
 public class RockPaperScissors {
 
     private String playerChoice, computerChoice;
