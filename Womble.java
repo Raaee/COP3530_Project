@@ -1,6 +1,8 @@
 /*
- * This is a word guessing game. Based off of the NewYork Time's Web game, Wordle.
- * Player attempts to guess a word within 6 tries of receiving letter position feedback.
+ * This is a word guessing game inspired by the New York Times' web game, Wordle. 
+ * The player has six tries to correctly guess a word based on letter position feedback. 
+ * The game is designed to test the player's vocabulary and deduction skills.
+ * The game ends when the player either correctly guesses the word or runs out of guesses.
  */
 
  public class Womble extends WombleWordsData {

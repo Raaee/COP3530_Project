@@ -1,6 +1,6 @@
 /*
- * Fortune teller game based off Magic 8 Ball. Player asks a question and receives an answer
- * that is along the lines of yes or no.
+ * This is a Fortune Teller game that provides players with answers to yes or no questions,
+ * based on the Magic 8 Ball concept.
  */
 
  class FortuneTeller {

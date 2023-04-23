@@ -1,9 +1,11 @@
+/* 
+ * This is a word scramble game that uses ArrayLists to store words and their scrambled versions. 
+ * The player has to unscramble the word and the game keeps track of the score. 
+ * It includes methods to handle different aspects of the game and a menu system for difficulty selection.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
-
-/* 
- * This is a word scramble game. 
- */
 
 public class WordScramble extends WordScrambleData {
 

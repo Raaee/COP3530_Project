@@ -1,5 +1,7 @@
 /*
- *    summary
+ * This is a Black Jack game with a resettable deck of cards where the player plays against the dealer. 
+ * The player must try to get to 21 without going over. The game continues until the player chooses to stand, 
+ * the player goes over 21, or the dealer's hand is worth at least 17. The game has a play-again feature.
  */
 public class BlackJack extends PlayerBJK {
     private Input input = new Input();

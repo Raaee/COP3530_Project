@@ -1,3 +1,10 @@
+/*
+ * This is a Battleships game that allows players to guess the location of ships on a battlefield. 
+ * The class extends the BattleshipsData class to handle gameplay. The game offers a menu where the 
+ * player selects the level of difficulty. The player then enters their guesses, with the game providing 
+ * feedback on the number of hits and misses. The game continues until the player has sunk all of the ships 
+ * or used up all their guesses.
+ */
 public class Battleships extends BattleshipsData {
 
     private Input input = new Input();
