@@ -1,5 +1,7 @@
 /*
- *    summary
+ *    Blackjack is a card game, where the objective is to have a hand value of 21 or close to 21.
+ *    The player is dealt two cards and can choose to "hit", getting another card, or "stand", keeping their
+ *    current hand. 
  */
 public class BlackJack extends PlayerBJK {
     private Input input = new Input();

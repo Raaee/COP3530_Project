@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /*
- *    SUMMARY OF CLASS GOES HERE
+ *    This class contains the deck and card classes that creates the dealer hand and the deck itself. 
  */
 public class Dealer {
     private Deck deck;
