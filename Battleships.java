@@ -6,7 +6,10 @@
  * or used up all their guesses.
  */
 public class Battleships extends BattleshipsData {
-
+/**
+ * Battleships is a strategy guessing game played on a grid of squares. 
+ * Players take turns guessing the location of their opponent's ships by calling out coordinates on the grid.
+ */
     private Input input = new Input();
     private String playerGuess;
     private boolean playAgain;

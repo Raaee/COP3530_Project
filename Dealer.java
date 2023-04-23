@@ -4,12 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /*
- * The Dealer class creates a deck of cards, shuffles it, and manages the dealer's hand in a card game. 
- * It uses a Stack to create the deck of cards, a Collections class to shuffle the deck, a LinkedList 
- * to manage the dealer's hand, and a Queue to keep track of the order of the cards in the dealer's hand. 
- * The Card class defines a card with a rank and suit and provides a method to calculate the value of a card 
- * based on its rank and the current total of the hand.
+ *    This class contains the deck and card classes that creates the dealer hand and the deck itself. 
  */
+ 
 public class Dealer {
     private Deck deck;
     private Queue<Card> dealerHand;

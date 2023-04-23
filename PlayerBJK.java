@@ -1,7 +1,5 @@
 /*
- * This is a Black Jack class that uses a LinkedList and a Queue to manage the player's hand of cards. 
- * The PlayerBJK class extends the Dealer class and has methods to create the player's hand, 
- * add cards to the hand, clear the hand, print the hand, and get and set the total value of the hand.
+ *    This class is for the player, where it creates the player hand and gets the player's total.
  */
 
 import java.util.LinkedList;
